@@ -18,6 +18,13 @@ class Car{
     }
 
     update(){
+
+        this.#move();
+        
+    }
+
+    #move() {
+
         if(this.controls.forward){
             //alert(" in forwardd");
             //this.y = this.y - 2;
@@ -45,19 +52,27 @@ class Car{
             this.speed = 0;
         }
 
-        if(this.controls.left){
-            //this.x -= 2;
-            this.angle += 0.03;
-        }
-        if(this.controls.right){
-            //this.x += 2;
-            this.angle -= 0.03;
+        if(this.speed != 0){
+            if(this.controls.left){
+                const flip = this.speed > 0 ? 1 : -1;
+                //this.x -= 2;
+                this.angle += 0.03 * flip;
+            }
+            if(this.controls.right){
+                //this.x += 2;
+                this.angle -= 0.03 * flip;
+            }
         }
 
         this.x -= Math.sin(this.angle) * this.speed;
         this.y -= Math.cos(this.angle) * this.speed;
 
         //this.y -= this.speed;
+
+
+
+
+
 
     }
 
